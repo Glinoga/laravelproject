@@ -29,9 +29,12 @@
     <!-- Header Section -->
     <header class="bg-white shadow-lg py-6">
         <div class="container mx-auto px-6 flex justify-between items-center">
+
             <!-- Logo Section -->
             <div class="text-2xl font-bold text-blue-600">
-                Bri's Funkopops
+                <a href="/">
+                    <img class="size-10" src="/toyhorse.svg" alt="Toy Horse" />
+                </a>
             </div>
 
             <!-- Navigation Section -->
