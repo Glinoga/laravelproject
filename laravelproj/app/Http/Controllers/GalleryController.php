@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FunkoGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -21,22 +22,24 @@ class GalleryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $path = $request->file('image')->store('public/gallery');
+        // Store the image
+        $path = $request->file('image')->store('funko_gallery', 'public');
 
+        // Save to database
         FunkoGallery::create([
-            'user_id' => Auth::id(),
-            'title' => $request->title,
-            'description' => $request->description,
+            'user_id' => auth()->id(),
+            'title' => $validated['title'],
+            'description' => $validated['description'],
             'image_path' => $path,
         ]);
 
-        return redirect()->route('gallery.index')->with('success', 'Funko Pop added to the gallery!');
+        return redirect()->route('gallery.index')->with('success', 'Gallery item added successfully!');
     }
 }
 
