@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('success'))
+<div class="container mx-auto px-4 py-4">
+    <div class="bg-green-100 text-green-800 px-4 py-2 rounded-md shadow">
+        {{ session('success') }}
+    </div>
+</div>
+@endif
+
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-4xl font-semibold mb-8 text-center text-gray-800">Community Gallery</h1>
 

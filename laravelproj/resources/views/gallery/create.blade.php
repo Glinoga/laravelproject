@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-4 text-center">Submit Your FunkoPop Gallery Item</h1>
-
+    <p class="text-3x mb-4 text-center">Show us your rarest funko, for the whole community to see!</p>
     <form action="{{ route('gallery.store') }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded-lg p-6">
         @csrf
         <div class="mb-4">

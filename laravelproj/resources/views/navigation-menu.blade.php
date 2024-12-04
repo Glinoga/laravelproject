@@ -18,6 +18,9 @@
                     <x-nav-link href="{{ route('gallery.index') }}" :active="request()->routeIs('gallery.index')">
                         {{ __('Forum') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('gallery.create') }}" :active="request()->routeIs('gallery.create')">
+                        {{ __('Submit your Funko') }}
+                    </x-nav-link>
                     
                 </div>
             </div>
