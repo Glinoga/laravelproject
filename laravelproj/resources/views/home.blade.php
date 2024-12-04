@@ -42,15 +42,16 @@
                 @if (Route::has('login'))
                     <div class="flex items-center space-x-6">
                         @auth
-                            <a href="{{ url('/dashboard') }}"
-                               class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">Dashboard</a>
+                            @if (auth()->user()->role === 'admin')
+                                <a href="{{ url('admin/dashboard') }}" class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">Admin Dashboard</a>
+                            @else
+                                <a href="{{ url('user/dashboard') }}" class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">User Dashboard</a>
+                            @endif
                         @else
-                            <a href="{{ route('login') }}"
-                               class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">Log in</a>
+                            <a href="{{ route('login') }}" class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">Log in</a>
 
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}"
-                                   class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">Register</a>
+                                <a href="{{ route('register') }}" class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">Register</a>
                             @endif
                         @endauth
                     </div>
@@ -71,8 +72,7 @@
                     { name: 'Darth Vader', image: '{{ asset('images/darthvader.jpg') }}' },
                     { name: 'Morty', image: '{{ asset('images/morty.jpg') }}' },
                 ], currentPop: 0 }"
-                x-init="setInterval(() => { currentPop = (currentPop + 1) % pops.length }, 6000)"
-                class="space-y-6">
+                x-init="setInterval(() => { currentPop = (currentPop + 1) % pops.length }, 6000)" class="space-y-6">
 
                 <!-- Display Random Funko Pop -->
                 <div class="flex justify-center">
