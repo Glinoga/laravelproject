@@ -17,6 +17,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 //Admin Routes
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin_dashboard');
     Route::post('/funko/store', [AdminController::class, 'store'])->name('funko.store');
+    Route::get('admin/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
+    Route::delete('admin/gallery/{id}', [AdminController::class, 'softDelete'])->name('admin.softDelete');
+    Route::post('admin/gallery/{id}/restore', [AdminController::class, 'restore'])->name('admin.restore');
+    Route::delete('admin/gallery/{id}/permanent', [AdminController::class, 'permanentDelete'])->name('admin.permanentDelete');
 });
 
 

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Funko;
+use App\Models\FunkoGallery;
 
 class AdminController extends Controller
 {
@@ -42,6 +43,41 @@ class AdminController extends Controller
         ]);
 
         return redirect()->route('admin_dashboard');
+    }
+
+    public function gallery()
+    {
+        // Fetch all Funko posts, including soft-deleted ones
+        $funkos = FunkoGallery::withTrashed()->get();
+
+        return view('admin.gallery', compact('funkos'));
+    }
+
+    public function softDelete($id)
+    {
+        // Soft delete the Funko post
+        $funko = FunkoGallery::findOrFail($id);
+        $funko->delete();
+
+        return redirect()->route('admin.gallery')->with('success', 'Funko post has been deleted.');
+    }
+
+    public function restore($id)
+    {
+        // Restore a soft-deleted Funko post
+        $funko = FunkoGallery::withTrashed()->findOrFail($id);
+        $funko->restore();
+
+        return redirect()->route('admin.gallery')->with('success', 'Funko post has been restored.');
+    }
+
+    public function permanentDelete($id)
+    {
+        // Permanently delete the Funko post
+        $funko = FunkoGallery::withTrashed()->findOrFail($id);
+        $funko->forceDelete();
+
+        return redirect()->route('admin.gallery')->with('success', 'Funko post has been permanently deleted.');
     }
 }
 
