@@ -59,9 +59,9 @@
         <div class="grid grid-cols-3 gap-6">
             @foreach($funkos as $funko)
                 <div class="bg-white p-4 shadow rounded-lg">
-                    <h3 class="text-xl font-bold">{{ $funko->name }}</h3>
+                    <h3 class="text-xl font-bold">{{ $funko->title }}</h3>
                     <p>{{ $funko->description }}</p>
-                    <img src="{{ asset('storage/' . $funko->image) }}" alt="{{ $funko->name }}" class="mt-4 w-32 h-32 object-cover rounded-lg">
+                    <img src="{{ asset('storage/' . $funko->image_path) }}" alt="{{ $funko->name }}" class="mt-4 w-32 h-32 object-cover rounded-lg">
 
                     <!-- Display different buttons based on the Funko's status -->
                     @if($funko->deleted_at)
