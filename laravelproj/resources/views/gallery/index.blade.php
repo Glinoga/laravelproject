@@ -21,9 +21,6 @@
                 <p class="text-sm text-gray-500 mt-1">By: {{ $item->user->name }}</p>
                 <p class="text-gray-700 mt-2">{{ Str::limit($item->description, 100) }}</p>
             </div>
-            <div class="px-4 py-2 bg-gray-100 text-right">
-                <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm">Read more...</a>
-            </div>
         </div>
         @endforeach
     </div>
