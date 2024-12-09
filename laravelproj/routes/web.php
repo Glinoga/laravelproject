@@ -38,4 +38,7 @@ Route::middleware([
     Route::delete('admin/gallery/{id}', [AdminController::class, 'softDelete'])->name('admin.softDelete');
     Route::post('admin/gallery/{id}/restore', [AdminController::class, 'restore'])->name('admin.restore');
     Route::delete('admin/gallery/{id}/permanent', [AdminController::class, 'permanentDelete'])->name('admin.permanentDelete');
+
+    Route::post('/admin/funko/{id}/toggle-sold-out', [AdminController::class, 'toggleSoldOut'])->name('admin.toggleSoldOut');
+
 });

@@ -45,7 +45,7 @@
                             @if (auth()->user()->role === 'admin')
                                 <a href="{{ url('admin/dashboard') }}" class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">Admin Dashboard</a>
                             @else
-                                <a href="{{ url('user/dashboard') }}" class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">User Dashboard</a>
+                                <a href="{{ url('dashboard') }}" class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">User Dashboard</a>
                             @endif
                         @else
                             <a href="{{ route('login') }}" class="text-gray-800 font-medium hover:text-gray-600 transition duration-200">Log in</a>
