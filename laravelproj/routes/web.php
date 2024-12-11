@@ -14,7 +14,6 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'isUser:user' // Ensure this checks the 'user' role
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
