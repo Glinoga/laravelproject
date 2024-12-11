@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class FunkoGallery extends Model
 {
-    use SoftDeletes; // This ensures soft delete functionality
+    use HasFactory, SoftDeletes; // This ensures soft delete functionality
     protected $table = 'funko_galleries'; // Explicitly defining the table name
     protected $fillable = ['user_id', 'title', 'description', 'image_path'];
 
