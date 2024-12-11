@@ -9,8 +9,14 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// User Routes
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'isUser:user' // Ensure this checks the 'user' role
+])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
     Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create')->middleware('auth');
     Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store')->middleware('auth');
@@ -24,5 +30,8 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::delete('admin/gallery/{id}', [AdminController::class, 'softDelete'])->name('admin.softDelete');
     Route::post('admin/gallery/{id}/restore', [AdminController::class, 'restore'])->name('admin.restore');
     Route::delete('admin/gallery/{id}/permanent', [AdminController::class, 'permanentDelete'])->name('admin.permanentDelete');
+
+    Route::post('/admin/funko/{id}/toggle-sold-out', [AdminController::class, 'toggleSoldOut'])->name('admin.toggleSoldOut');
+
 });
 

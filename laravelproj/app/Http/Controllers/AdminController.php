@@ -13,19 +13,34 @@ class AdminController extends Controller
     public function index()
     {
         // Fetch all Funkos
-        $funkos = Funko::all();
+        $funkos = Funko::paginate(6);
 
         // Return the admin dashboard view with the Funkos
         return view('admin_dashboard', compact('funkos'));
     }
+
+    // In AdminController.php
+
+public function toggleSoldOut(Request $request, $id)
+{
+    // Find the Funko by ID
+    $funko = Funko::findOrFail($id);
+
+    // Toggle the sold_out status
+    $funko->sold_out = !$funko->sold_out;
+    $funko->save();
+
+    // Return the updated status as a JSON response
+    return response()->json(['sold_out' => $funko->sold_out]);
+}
+
 
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'sold_out' => 'nullable|boolean',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
         // Handle the image upload
@@ -79,5 +94,31 @@ class AdminController extends Controller
 
         return redirect()->route('admin.gallery')->with('success', 'Funko post has been permanently deleted.');
     }
+
+    public function update(Request $request, $id)
+{
+    $funko = Funko::findOrFail($id);
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+    ]);
+
+    // Handle the image upload if there's a new image
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('funkos', 'public');
+        $funko->image = $imagePath;
+    }
+
+    // Update the Funko details
+    $funko->name = $request->name;
+    $funko->description = $request->description;
+    $funko->save();
+
+    return redirect()->route('admin_dashboard')->with('success', 'Funko updated successfully!');
+}
+
+    
 }
 

@@ -17,7 +17,7 @@ class DashboardController extends Controller
         return redirect()->route('admin_dashboard');
     }
     
-    $funkos = Funko::all(); // Or use any logic to get the Funkos
+    $funkos = Funko::paginate(6); // Or use any logic to get the Funkos
 
     return view('dashboard', compact('funkos'));
 }
