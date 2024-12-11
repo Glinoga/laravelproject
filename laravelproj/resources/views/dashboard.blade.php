@@ -16,9 +16,9 @@
 
             <!-- Tabs for filtering -->
             <div class="flex space-x-6 mb-6 justify-center">
-                <button id="allFunkos" class="px-6 py-3 bg-indigo-600 text-white rounded-lg focus:outline-none hover:bg-indigo-700 transition-all duration-200 w-full sm:w-auto">All Funkos</button>
-                <button id="availableFunkos" class="px-6 py-3 bg-indigo-600 text-white rounded-lg focus:outline-none hover:bg-indigo-700 transition-all duration-200 w-full sm:w-auto">Available</button>
-                <button id="soldOutFunkos" class="px-6 py-3 bg-indigo-600 text-white rounded-lg focus:outline-none hover:bg-indigo-700 transition-all duration-200 w-full sm:w-auto">Sold Out</button>
+                <button id="allFunkos" class="px-6 py-3 bg-black text-white rounded-lg focus:outline-none hover:bg-gray-500 transition-all duration-200 w-full sm:w-auto">All Funkos</button>
+                <button id="availableFunkos" class="px-6 py-3 bg-black text-white rounded-lg focus:outline-none hover:bg-gray-500 transition-all duration-200 w-full sm:w-auto">Available</button>
+                <button id="soldOutFunkos" class="px-6 py-3 bg-black text-white rounded-lg focus:outline-none hover:bg-gray-500 transition-all duration-200 w-full sm:w-auto">Sold Out</button>
             </div>
 
             <!-- Funko Gallery -->
@@ -31,12 +31,7 @@
     <p class="text-gray-600">{{ $funko->description }}</p>
     <p class="mt-2 text-sm text-gray-500">{{ $funko->sold_out ? 'Sold Out' : 'Available' }}</p>
 
-    <!-- Edit Button -->
-    @if(!$funko->sold_out)
-        <button class="edit-btn mt-2 px-4 py-2 bg-indigo-600 text-white rounded-lg" data-id="{{ $funko->id }}" data-name="{{ $funko->name }}" data-description="{{ $funko->description }}" data-image="{{ $funko->image_url }}">
-            Edit
-        </button>
-    @endif
+    
 </div>
 
                     @endforeach
@@ -62,7 +57,7 @@
             <input type="file" name="image" id="editImage" class="mt-1 block w-full" accept="image/*">
 
             <!-- Submit Button -->
-            <button type="submit" class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg">Save Changes</button>
+            <button type="submit" class="mt-4 px-4 py-2 bg-black text-white rounded-lg">Save Changes</button>
         </form>
         <button id="closeModal" class="mt-2 px-4 py-2 bg-red-600 text-white rounded-lg">Close</button>
     </div>

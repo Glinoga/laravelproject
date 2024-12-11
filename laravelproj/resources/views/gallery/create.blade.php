@@ -22,7 +22,7 @@
         </div>
 
         <div class="text-right">
-            <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+            <button type="submit" class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-500 transition">
                 Submit
             </button>
         </div>
