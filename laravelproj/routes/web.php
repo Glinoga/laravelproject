@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FunkoController; // This line is important
+
 
 Route::get('/', function () {
     return view('home');
@@ -40,5 +42,19 @@ Route::middleware([
     Route::delete('admin/gallery/{id}/permanent', [AdminController::class, 'permanentDelete'])->name('admin.permanentDelete');
 
     Route::post('/admin/funko/{id}/toggle-sold-out', [AdminController::class, 'toggleSoldOut'])->name('admin.toggleSoldOut');
+
+    Route::get('/admin/funko/{id}/edit', [AdminController::class, 'edit'])->name('funko.edit');
+    Route::put('/admin/funko/{id}', [AdminController::class, 'update'])->name('funko.update');
+
+     // Soft delete a Funko
+     Route::delete('/admin/funko/{id}/soft-delete', [FunkoController::class, 'softDelete'])->name('admin.softDeleteFunko');
+
+     // Restore a soft-deleted Funko
+     Route::post('/admin/funko/{id}/restore', [FunkoController::class, 'restore'])->name('admin.restoreFunko');
+     
+ 
+     // Permanently delete a Funko
+     Route::delete('/admin/funko/{id}/permanently-delete', [FunkoController::class, 'permanentlyDelete'])->name('admin.permanentlyDelete');
+     
 
 });

@@ -95,30 +95,49 @@ public function toggleSoldOut(Request $request, $id)
         return redirect()->route('admin.gallery')->with('success', 'Funko post has been permanently deleted.');
     }
 
-    public function update(Request $request, $id)
-{
-    $funko = Funko::findOrFail($id);
-
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required|string',
-        'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-    ]);
-
-    // Handle the image upload if there's a new image
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('funkos', 'public');
-        $funko->image = $imagePath;
-    }
-
-    // Update the Funko details
-    $funko->name = $request->name;
-    $funko->description = $request->description;
-    $funko->save();
-
-    return redirect()->route('admin_dashboard')->with('success', 'Funko updated successfully!');
-}
-
+    public function edit($id)
+    {
+        // Fetch the Funko to edit
+        $funko = Funko::findOrFail($id);
     
+        // Check if the Funko is sold out
+        if ($funko->sold_out) {
+            return redirect()->route('admin.gallery')->with('error', 'Cannot edit a sold-out Funko!');
+        }
+    
+        // Return the edit view with the Funko data
+        return view('admin.edit', compact('funko'));
+    }
+    
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+    
+        // Find the Funko to update
+        $funko = Funko::findOrFail($id);
+    
+        // Prevent updating a sold-out Funko
+        if ($funko->sold_out) {
+            return redirect()->route('admin.gallery')->with('error', 'Cannot update a sold-out Funko!');
+        }
+    
+        // Update Funko details
+        $funko->name = $request->name;
+        $funko->description = $request->description;
+    
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('funkos', 'public');
+            $funko->image = $imagePath;
+        }
+    
+        // Save changes
+        $funko->save();
+    
+        return redirect()->route('admin_dashboard')->with('success', 'Funko updated successfully!');
+    }
 }
-
