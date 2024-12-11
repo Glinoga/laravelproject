@@ -38,16 +38,8 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin/funko/{id}/edit', [AdminController::class, 'edit'])->name('funko.edit');
     Route::put('/admin/funko/{id}', [AdminController::class, 'update'])->name('funko.update');
 
-     // Soft delete a Funko
-     Route::delete('/admin/funko/{id}/soft-delete', [FunkoController::class, 'softDelete'])->name('admin.softDeleteFunko');
-
-     // Restore a soft-deleted Funko
-     Route::post('/admin/funko/{id}/restore', [FunkoController::class, 'restore'])->name('admin.restoreFunko');
-     
- 
-     // Permanently delete a Funko
-     Route::delete('/admin/funko/{id}/permanently-delete', [FunkoController::class, 'permanentlyDelete'])->name('admin.permanentlyDelete');
-     
-
+    // Funko soft delete, restore, and permanent delete routes
+    Route::delete('/admin/funko/{id}/soft-delete', [FunkoController::class, 'softDelete'])->name('admin.softDeleteFunko');
+    Route::post('/admin/funko/{id}/restore', [FunkoController::class, 'restore'])->name('admin.restoreFunko');
+    Route::delete('/admin/funko/{id}/permanently-delete', [FunkoController::class, 'permanentlyDelete'])->name('admin.permanentlyDelete');
 });
-

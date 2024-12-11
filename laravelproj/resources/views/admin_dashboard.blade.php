@@ -154,29 +154,13 @@
                                 <button class="sold-out-btn mt-2 px-4 py-2 bg-indigo-600 text-white rounded-lg mb-2 w-full sm:w-auto {{ $funko->sold_out ? 'opacity-50 cursor-not-allowed' : '' }}">
                                     {{ $funko->sold_out ? 'Sold Out' : 'Mark as Sold Out' }}
                                 </button>
-
-                                <!-- Soft Delete / Restore / Permanent Delete -->
-                                @if($funko->trashed()) <!-- If soft deleted -->
-                                    <!-- Restore Button -->
-                                    <form action="{{ route('admin.restore', $funko->id) }}" method="POST" class="mt-2">
-                                        @csrf
-                                        <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg w-full sm:w-auto">Restore</button>
-                                    </form>
-
-                                    <!-- Permanent Delete Button -->
-                                    <form action="{{ route('admin.permanentlyDelete', $funko->id) }}" method="POST" class="mt-2">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg w-full sm:w-auto">Permanently Delete</button>
-                                    </form>
-                                @else <!-- If not soft deleted -->
+        
                                     <!-- Soft Delete Button -->
-                                    <form action="{{ route('admin.softDelete', $funko->id) }}" method="POST">
+                                    <form action="{{ route('admin.softDeleteFunko', $funko->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="mt-2 px-4 py-2 bg-red-600 text-white rounded-lg w-full sm:w-auto">Delete</button>
                                     </form>
-                                @endif
                             </div>
                         @endforeach
                     </div>
@@ -187,33 +171,34 @@
             </div>
 
             <!-- Trashed Funkos (Soft-Deleted Funkos) -->
-            <div class="mt-8">
-                <h2 class="text-2xl font-semibold text-gray-700">Trashed Funkos</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
-                    @foreach ($funkos as $funko)
-                        @if ($funko->trashed()) <!-- Display only trashed Funkos -->
-                            <div class="funko-card bg-white p-4 shadow rounded-lg opacity-50">
-                                <img src="{{ $funko->image_url }}" alt="{{ $funko->name }}" class="w-full h-48 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-semibold">{{ $funko->name }}</h3>
-                                <p class="text-gray-600">{{ $funko->description }}</p>
-                                <p class="mt-2 text-sm text-gray-500">Trashed</p>
+<div class="mt-8">
+    <h2 class="text-2xl font-semibold text-gray-700">Trashed Funkos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+        @foreach ($funkos as $funko)
+            @if ($funko->trashed()) <!-- Display only trashed Funkos -->
+                <div class="funko-card bg-white p-4 shadow rounded-lg opacity-50">
+                    <img src="{{ $funko->image_url }}" alt="{{ $funko->name }}" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold">{{ $funko->name }}</h3>
+                    <p class="text-gray-600">{{ $funko->description }}</p>
+                    <p class="mt-2 text-sm text-gray-500">Trashed</p>
 
-                                <!-- Restore Button -->
-                                <form action="{{ route('admin.restore', $funko->id) }}" method="POST" class="mt-2">
-                                    @csrf
-                                    <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg w-full sm:w-auto">Restore</button>
-                                </form>
+                    <!-- Restore Button -->
+                    <form action="{{ route('admin.restoreFunko', $funko->id) }}" method="POST" class="mt-2">
+                        @csrf
+                        <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg w-full sm:w-auto">Restore</button>
+                    </form>
 
-                                <!-- Permanent Delete Button -->
-                                <form action="{{ route('admin.permanentlyDelete', $funko->id) }}" method="POST" class="mt-2">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg w-full sm:w-auto">Permanently Delete</button>
-                                </form>
-                            </div>
-                        @endif
-                    @endforeach
+                    <!-- Permanent Delete Button -->
+                    <form action="{{ route('admin.permanentlyDelete', $funko->id) }}" method="POST" class="mt-2">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg w-full sm:w-auto">Permanently Delete</button>
+                    </form>
                 </div>
+            @endif
+        @endforeach
+                </div>
+                
             </div>
         </div>
     </div>

@@ -35,7 +35,7 @@
                     <!-- Current Image Display -->
                     <div class="mt-3">
                         <label for="current-image" class="block text-gray-700">Current Image</label>
-                        <img src="{{ asset('storage/' . $funko->image_url) }}" alt="{{ $funko->name }}" class="w-48 h-48 object-cover rounded-lg mt-2">
+                        <img src="{{$funko->image_url}}" alt="{{ $funko->name }}" class="w-48 h-48 object-cover rounded-lg mt-2">
                     </div>
 
                     <!-- Image Input (Optional) -->
