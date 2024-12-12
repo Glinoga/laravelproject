@@ -9,13 +9,7 @@ use Illuminate\Support\Facades\Session;
 class FunkoController extends Controller
 {
     // Show the list of Funkos (already exists)
-    public function index()
-{
-    // Fetch all Funkos, including soft-deleted ones
-    $trashedFunkos = Funko::onlyTrashed()->paginate(6);
-
-    return view('admin_dashboard', compact('funkos', 'trashedFunkos'));
-}
+   
 public function trashedFunkos()
 {
     $trashedFunkos = Funko::onlyTrashed()->paginate(6);// Adjust pagination as needed

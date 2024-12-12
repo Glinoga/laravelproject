@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
-            $table->boolean('is_admin')->default('1');
+            $table->boolean('is_admin')->default('0');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
