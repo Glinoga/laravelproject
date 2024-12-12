@@ -16,7 +16,12 @@ class FunkoController extends Controller
 
     return view('admin_dashboard', compact('funkos', 'trashedFunkos'));
 }
+public function trashedFunkos()
+{
+    $trashedFunkos = Funko::onlyTrashed()->paginate(10); // Adjust pagination as needed
 
+    return view('trashed-funkos', compact('trashedFunkos'));
+}
 public function softDelete($id)
 {
     $funko = Funko::findOrFail($id);
