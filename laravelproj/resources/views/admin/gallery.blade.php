@@ -1,68 +1,125 @@
-<!-- resources/views/admin/gallery.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    @vite('resources/css/app.css')
-    <style>
-        /* Sidebar style */
-        .sidebar {
-            background-color: #1E40AF; /* Blue background */
-            color: white; /* White text */
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for effect */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  @vite('resources/css/app.css')
+  <style>
+    /* Navbar styles */
+    .navbar {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10; /* Ensure navbar stays on top */
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+    }
+
+    .navbar a:hover {
+      background-color: #292929;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    /* Main content styles */
+    .main-content {
+      padding: 1rem;
+      margin-top: 60px; /* Account for navbar height */
+    }
+
+    /* Redundant sidebar styles */
+    .sidebar {
+      display: none; /* Hide the sidebar completely */
+    }
+
+    /* Rest of your styles (unchanged) */
+    .grid img {
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0); 
+      background-color: rgba(0,0,0,0.4); 
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body class="bg-gray-100">
 
-    <!-- Admin Sidebar -->
-    <div class="flex h-screen">
-        <!-- Sidebar -->
-        <div class="w-64 sidebar p-6 min-h-screen">
-            <h2 class="text-3xl font-semibold mb-8 text-white">Admin Dashboard</h2>
+  <div class="navbar">
+    <h2 class="text-xl font-semibold text-white">Admin Dashboard</h2>
+    <ul class="flex space-x-4">
+      <li>
+        <a href="{{ route('admin_dashboard') }}">Dashboard</a>
+      </li>
+      <li>
+        <a href="{{ route('admin.gallery') }}">Gallery</a>
+      </li>
+      <li>
+        <a href="{{ route('trashed.funkos') }}">Trashed Funkos</a>
+      </li>
+      <li>
+        <form action="{{ route('logout') }}" method="POST">
+          @csrf
+          <button type="submit" class="text-white hover:underline">Log Out</button>
+        </form>
+      </li>
+    </ul>
+  </div>
 
-            <ul class="space-y-6">
-                <li>
-                    <a href="{{ route('admin_dashboard') }}" class="flex items-center py-2 px-4 hover:bg-indigo-600 text-white rounded-lg transition-all duration-200">
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('admin.gallery') }}" class="flex items-center py-2 px-4 hover:bg-indigo-600 text-white rounded-lg transition-all duration-200">
-                        Gallery
-                    </a>
-                </li>
-                <li>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="flex items-center py-2 px-4 hover:bg-indigo-600 text-white rounded-lg w-full text-left transition-all duration-200">
-                            Log Out
-                        </button>
-                    </form>
-                </li>
-            </ul>
+  <div class="main-content">
 
-            
-        </div>
-    <div class="container">
-        <h1 class="text-2xl font-bold mb-6">Admin Gallery</h1>
-
-        <!-- Success message -->
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        <div class="grid grid-cols-3 gap-6">
+            <div class="mt-8">
+    <h2 class="text-2xl font-semibold text-gray-700">Here are the submitted funkos by the user.</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
             @foreach($funkos as $funko)
                 <div class="bg-white p-4 shadow rounded-lg">
+         
+                    <img src="{{ asset('storage/' . $funko->image_path) }}" alt="{{ $funko->name }}" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-bold">{{ $funko->title }}</h3>
-                    <p>{{ $funko->description }}</p>
-                    <img src="{{ asset('storage/' . $funko->image_path) }}" alt="{{ $funko->name }}" class="mt-4 w-32 h-32 object-cover rounded-lg">
-
+                    <p class="text-gray-600">{{ $funko->description }}</p>
                     <!-- Display different buttons based on the Funko's status -->
                     @if($funko->deleted_at)
                         <div class="mt-4">

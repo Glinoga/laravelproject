@@ -11,7 +11,7 @@ class GalleryController extends Controller
 {
     public function index()
     {
-        $galleryItems = FunkoGallery::with('user')->latest()->paginate(10);
+        $galleryItems = FunkoGallery::with('user')->latest()->paginate(6);
         return view('gallery.index', compact('galleryItems'));
     }
 
