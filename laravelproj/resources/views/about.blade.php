@@ -33,7 +33,7 @@
 
 <footer class="bg-black text-white py-4 mt-10">
     <div class="container mx-auto text-center">
-        <p>&copy; 2024 Funko Haven. All Rights Reserved.</p>
+        <p>&copy; 2024 Got Funko. All Rights Reserved.</p>
     </div>
 </footer>
 @endsection
