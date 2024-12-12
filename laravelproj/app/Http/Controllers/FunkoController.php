@@ -18,7 +18,7 @@ class FunkoController extends Controller
 }
 public function trashedFunkos()
 {
-    $trashedFunkos = Funko::onlyTrashed()->paginate(10); // Adjust pagination as needed
+    $trashedFunkos = Funko::onlyTrashed()->paginate(6);// Adjust pagination as needed
 
     return view('trashed-funkos', compact('trashedFunkos'));
 }

@@ -112,12 +112,13 @@
                         <button id="allFunkos" class="px-6 py-3 bg-indigo-600 text-white rounded-lg focus:outline-none hover:bg-indigo-700 transition-all duration-200 w-full sm:w-auto">All Funkos</button>
                         <button id="availableFunkos" class="px-6 py-3 bg-indigo-600 text-white rounded-lg focus:outline-none hover:bg-indigo-700 transition-all duration-200 w-full sm:w-auto">Available</button>
                         <button id="soldOutFunkos" class="px-6 py-3 bg-indigo-600 text-white rounded-lg focus:outline-none hover:bg-indigo-700 transition-all duration-200 w-full sm:w-auto">Sold Out</button>
-                        <button id="trashedFunkos" class="px-6 py-3 bg-indigo-600 text-white rounded-lg focus:outline-none hover:bg-indigo-700 transition-all duration-200 w-full sm:w-auto"  href="{{ route('trashed.funkos') }}">Trashed Funkos</button>
+                        <!-- <button id="trashedFunkos" class="px-6 py-3 bg-indigo-600 text-white rounded-lg focus:outline-none hover:bg-indigo-700 transition-all duration-200 w-full sm:w-auto"  href="{{ route('trashed.funkos') }}">Trashed Funkos</button> -->
                     
                     </div>
 
                     <!-- Funko Gallery -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4" id="funkoGrid">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-8 mt-6" id="funkoGrid">
+
                         @foreach ($funkos as $funko)
                             <div class="funko-card bg-white p-4 shadow rounded-lg {{ $funko->sold_out ? 'bg-gray-200 opacity-50 sold-out' : 'available' }}" data-id="{{ $funko->id }}">
                                 <img src="{{ $funko->image_url }}" alt="{{ $funko->name }}" class="w-full h-48 object-cover rounded-lg mb-4">

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bri's Funkopops</title>
+    <title>Got Funko Website</title>
 
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -63,7 +63,7 @@
     <!-- Main Content (Random Funko Pops Display) -->
     <main class="py-12">
         <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to Bri's Funkopops</h1>
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to Got Funko!</h1>
             <p class="text-lg text-gray-600 mb-8">Explore, and find a funko pop just for you! </p>
 
             <!-- Funko Pop Carousel/Display -->

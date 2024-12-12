@@ -122,7 +122,7 @@
      
       <div class="grid grid-cols-1 sm:grid>
     <h2 class="text-2xl font-semibold text-gray-700">Here are the Trashed Funkos</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-8 mt-6" id="funkoGrid">
         @foreach ($trashedFunkos as $funko)
             @if ($funko->trashed()) <!-- Display only trashed Funkos -->
                 <div class="funko-card bg-white p-4 shadow rounded-lg opacity-50">

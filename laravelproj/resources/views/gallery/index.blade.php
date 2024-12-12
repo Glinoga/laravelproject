@@ -12,7 +12,7 @@
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-4xl font-semibold mb-8 text-center text-gray-800">Community Gallery</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-8 mt-6" id="funkoGrid">
         @foreach($galleryItems as $item)
         <div class="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
             <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->title }}" class="w-full h-56 object-cover rounded-t-lg">
